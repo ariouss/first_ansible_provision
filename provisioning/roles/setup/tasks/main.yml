@@ -1,0 +1,8 @@
+- name: Update apt packages
+  apt:
+    update_cache: yes
+  tags:
+    - system
+
+- name: Import docker tasks
+  include_tasks: docker.yml

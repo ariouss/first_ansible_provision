@@ -1,0 +1,21 @@
+- name: Update apt packages
+  apt:
+    update_cache: yes
+  tags:
+    - docker
+
+- name: Install docker
+  apt:
+    name: docker-compose
+    state: present
+  notify: Start docker on boot
+  tags:
+    - docker
+
+- name: Add remote "ansible" user to "docker" groups
+  user:
+    name: "{{ remote_user }}"
+    groups: "{{ docker_group }}"
+    append: yes
+  tags:
+    - docker
